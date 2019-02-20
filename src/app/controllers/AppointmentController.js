@@ -1,4 +1,6 @@
 const { User, Appointment } = require("../models");
+const { Op } = require("sequelize");
+const { moment } = require("moment");
 
 class AppointmentController {
   async create(req, res) {
@@ -19,6 +21,22 @@ class AppointmentController {
     });
 
     return res.redirect("/app/dashboard");
+  }
+
+  async show(req, res) {
+    const { provider } = req.params;
+
+    const appointments = await Appointment.findAll({
+      where: {
+        provider_id: provider
+      }
+    });
+
+    const users = await User.findAll({
+      attributes: ["id", "name"]
+    });
+    console.log(users);
+    return res.render("appointments/show", { appointments, users });
   }
 }
 

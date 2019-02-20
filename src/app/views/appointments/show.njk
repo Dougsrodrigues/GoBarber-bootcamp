@@ -1,0 +1,15 @@
+{%extends "_layouts/default.njk" %}
+{% block body %}
+<h1>Os Horarios ocupados são : </h1>
+ <ul class="providers">
+    {% for appointment in appointments %}
+         <li class="provider">
+            <div>    
+                <p>{{appointment.date}}</p>
+            </div>
+         
+                
+         </li>
+    {%endfor%}
+ </ul>
+{% endblock %}
